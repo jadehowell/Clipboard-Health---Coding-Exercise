@@ -19,3 +19,13 @@ I renamed the candidate variable to partitionKey for more clarity in what the va
 I removed the type check if (typeof candidate !== "string") since the JSON.stringify method will always return a string, so the check is unnecessary.
 I used the || operator to assign partitionKey a value if event?.partitionKey is falsy, which reduces the amount of code and makes it more concise.
 I used template literals instead of string concatenation to make the code more readable and simplify the syntax.
+
+### My tests explaination 
+
+These tests cover the following scenarios:
+
+A partition key is generated from the event object
+A partition key is taken from the event's partitionKey property
+If the partition key generated from the event object is too long, a hash is returned instead
+If no event is passed, a hash is returned
+Note that the hash length is 128 because the sha3-512 algorithm outputs a 512-bit hash, which is 64 characters in hexadecimal representation.
